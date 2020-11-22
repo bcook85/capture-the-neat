@@ -1,4 +1,4 @@
-class NN {
+class Neat {
 	constructor(populationCount, dimensions, mutationChance, mutationAmount) {
 		this.popCap = populationCount;
 		this.dimensions = dimensions;
@@ -117,25 +117,25 @@ class NN {
 		};
 		for (let i = 1; i < this.dimensions.length; i++) {
 			newBrain.layers.push({
-				"weights": NN.createMatrix(this.dimensions[i], this.dimensions[i - 1])
-				,"bias": NN.createMatrix(this.dimensions[i], 1)
+				"weights": Neat.createMatrix(this.dimensions[i], this.dimensions[i - 1])
+				,"bias": Neat.createMatrix(this.dimensions[i], 1)
 			});
 		}
 		return newBrain;
 	};
 	processInput(brainID, inputArray) {
-		let actionMaxtrix = NN.matrixFromArray(inputArray);
+		let actionMaxtrix = Neat.matrixFromArray(inputArray);
 		for (let i = 0; i < this.brains[brainID].layers.length; i++) {
-			let currentLayer = NN.matrixProduct(this.brains[brainID].layers[i].weights, actionMaxtrix);
-			currentLayer = NN.matrixAdd(currentLayer, this.brains[brainID].layers[i].bias);
+			let currentLayer = Neat.matrixProduct(this.brains[brainID].layers[i].weights, actionMaxtrix);
+			currentLayer = Neat.matrixAdd(currentLayer, this.brains[brainID].layers[i].bias);
 			if (i < this.brains[brainID].layers.length - 1) {
-				currentLayer = NN.matrixMap(currentLayer, NN.rectifiedLinear);
+				currentLayer = Neat.matrixMap(currentLayer, Neat.rectifiedLinear);
 			} else {
-				currentLayer = NN.matrixMap(currentLayer, NN.sigmoid);
+				currentLayer = Neat.matrixMap(currentLayer, Neat.sigmoid);
 			}
 			actionMaxtrix = currentLayer;
 		}
-		return NN.matrixToArray(actionMaxtrix);
+		return Neat.matrixToArray(actionMaxtrix);
 	};
 	/***************************************
 	Activation Functions
@@ -176,7 +176,7 @@ class NN {
 		return newMatrix;
 	};
 	static matrixAdd(m1, m2) {
-		let newMatrix = NN.createMatrix(m1.rows, m1.cols);
+		let newMatrix = Neat.createMatrix(m1.rows, m1.cols);
 		for (let y = 0; y < m1.rows; y++) {
 			for (let x = 0; x < m1.cols; x++) {
 				newMatrix.data[y][x] = m1.data[y][x] + m2.data[y][x];
@@ -185,7 +185,7 @@ class NN {
 		return newMatrix;
 	};
 	static matrixMap(matrix, fn) {
-		let newMatrix = NN.matrixCopy(matrix);
+		let newMatrix = Neat.matrixCopy(matrix);
 		for (let y = 0; y < newMatrix.rows; y++) {
 			for (let x = 0; x < newMatrix.cols; x++) {
 				newMatrix.data[y][x] = fn(newMatrix.data[y][x]);
@@ -195,7 +195,7 @@ class NN {
 	};
 	static matrixProduct(m1, m2) {
 		//Assumes m1.cols === m2.rows
-		let result = NN.createMatrix(m1.rows, m2.cols);
+		let result = Neat.createMatrix(m1.rows, m2.cols);
 		for (let y = 0; y < result.rows; y++) {
 			for (let x = 0; x < result.cols; x++) {
 				let sum = 0;
@@ -208,7 +208,7 @@ class NN {
 		return result;
 	};
 	static matrixFromArray(arr) {
-		let result = NN.createMatrix(arr.length, 1);
+		let result = Neat.createMatrix(arr.length, 1);
 		for (let i = 0; i < arr.length; i++) {
 			result.data[i][0] = arr[i];
 		}
@@ -224,7 +224,7 @@ class NN {
 		return arr;
 	};
 	static matrixCopy(m) {
-		let nm = NN.createMatrix(m.rows, m.cols);
+		let nm = Neat.createMatrix(m.rows, m.cols);
 		for (let y = 0; y < m.rows; y++) {
 			for (let x = 0; x < m.cols; x++) {
 				nm.data[y][x] = m.data[y][x];

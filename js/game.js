@@ -216,7 +216,7 @@ function initializeBots() {
 		,blueHomeImage
 	);
 
-	// Red NN
+	// Red Neat
 	let redDimensions = [32];
 	let redHiddenLayers = redBrainDimensionsInput.value.trim().split(",");
 	for (let i = 0; i < redHiddenLayers.length; i++) {
@@ -224,7 +224,7 @@ function initializeBots() {
 	}
 	redDimensions.push(4);
 
-	// Blue NN
+	// Blue Neat
 	let blueDimensions = [32];
 	let blueHiddenLayers = blueBrainDimensionsInput.value.trim().split(",");
 	for (let i = 0; i < blueHiddenLayers.length; i++) {
@@ -236,14 +236,14 @@ function initializeBots() {
 	botCount = parseInt(botsPerTeamInput.value);
 	brainCount = parseInt(roundsPerGenerationInput.value);
 	for (let i = 0; i < botCount; i++) {
-		redTeam.addBot(new NN(
+		redTeam.addBot(new Neat(
 			brainCount
 			,redDimensions
 			,parseFloat(redMutationRateInput.value)
 			,parseFloat(redMutationAmountInput.value)
 		));
 
-		blueTeam.addBot(new NN(
+		blueTeam.addBot(new Neat(
 			brainCount
 			,blueDimensions
 			,parseFloat(blueMutationRateInput.value)
@@ -398,8 +398,8 @@ function nextWave() {
 		currentGroup = 0;
 		currentGeneration += 1;
 		for (let i = 0; i < botCount; i++) {
-			redTeam.bots[i].nn.nextGeneration();
-			blueTeam.bots[i].nn.nextGeneration();
+			redTeam.bots[i].neat.nextGeneration();
+			blueTeam.bots[i].neat.nextGeneration();
 		}
 	}
 	redTeam.resetFlag();

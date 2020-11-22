@@ -38,7 +38,7 @@ class Team {
 			this.fov.push((Math.PI * -0.5) + (Math.PI / (this.rayCount - 1) * i));
 		}
 	};
-	addBot(nn) {
+	addBot(neat) {
 		let newBot = {
 			"id": this.botCount
 			,"alive": true
@@ -60,7 +60,7 @@ class Team {
 
 			,"visitedNodes": []
 
-			,"nn": nn
+			,"neat": neat
 
 			,"flagsCaptured": 0
 			,"flagsReturned": 0
@@ -117,7 +117,7 @@ class Team {
 		inputs.push(this.flag.atHome);
 		inputs.push(bot.hasFlag);
 		// Process inputs
-		let outputs = bot.nn.processInput(this.group, inputs);
+		let outputs = bot.neat.processInput(this.group, inputs);
 		// Bot movement
 		this.botMove(
 			bot
@@ -144,7 +144,7 @@ class Team {
 		}
 		if (!found) {
 			bot.visitedNodes.push([gridX,gridY]);
-			bot.nn.brains[this.group].score += this.pointValues.explore;
+			bot.neat.brains[this.group].score += this.pointValues.explore;
 		}
 	};
 	botVision(bot, enemyTeam, map) {
@@ -295,7 +295,7 @@ class Team {
 						if (dist <= this.bots[j].size) {
 							this.botTakeDamage(bot.id, enemyTeam);
 							bot.lastAttackDistance = s * this.rayStepSize;
-							bot.nn.brains[this.group].score += this.pointValues.hitAlly;
+							bot.neat.brains[this.group].score += this.pointValues.hitAlly;
 							return;
 						}
 					}
@@ -308,11 +308,11 @@ class Team {
 						let dist = Math.sqrt((dx * dx) + (dy * dy));
 						if (dist <= enemyTeam.bots[j].size) {
 							let deadEnemy = enemyTeam.botTakeDamage(enemyTeam.bots[j].id, this);
-							bot.nn.brains[this.group].score += this.pointValues.hitEnemy;
+							bot.neat.brains[this.group].score += this.pointValues.hitEnemy;
 							if (deadEnemy) {
 								bot.kills += 1;
 								this.kills += 1;
-								bot.nn.brains[this.group].score += this.pointValues.hitEnemy;//double points for a kill shot
+								bot.neat.brains[this.group].score += this.pointValues.hitEnemy;//double points for a kill shot
 							}
 							bot.lastAttackDistance = s * this.rayStepSize;
 							return;
@@ -330,7 +330,7 @@ class Team {
 			if (Math.sqrt((dx * dx) + (dy * dy)) <= bot.size + enemyTeam.flag.size) {
 				enemyTeam.enemyTakeFlag(bot.id);
 				bot.hasFlag = 1;
-				bot.nn.brains[this.group].score += this.pointValues.pickUpEnemyFlag;
+				bot.neat.brains[this.group].score += this.pointValues.pickUpEnemyFlag;
 			}
 		}
 		// Capture Enemy Flag
@@ -342,7 +342,7 @@ class Team {
 				bot.hasFlag = 0;
 				this.captures += 1;
 				bot.flagsCaptured += 1;
-				bot.nn.brains[this.group].score += this.pointValues.captureEnemyFlag;
+				bot.neat.brains[this.group].score += this.pointValues.captureEnemyFlag;
 			}
 		}
 		// Return Team Flag
@@ -352,7 +352,7 @@ class Team {
 			if (Math.sqrt((dx * dx) + (dy * dy)) <= bot.size + this.flag.size) {
 				this.resetFlag();
 				bot.flagsReturned += 1;
-				bot.nn.brains[this.group].score += this.pointValues.pickUpEnemyFlag;//same value, I guess
+				bot.neat.brains[this.group].score += this.pointValues.pickUpEnemyFlag;//same value, I guess
 			}
 		}
 	};
