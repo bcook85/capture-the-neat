@@ -92,11 +92,11 @@ function resetMapOptions() {
 
 // Game UI
 let canvas = document.getElementById("screen");
-canvas.onclick = function() {screen.toggleFullscreen();}
 
 function startSimulation() {
 	// Game
 	maxRoundTime = parseInt(roundTimeInput.value) * 60;//60 frames per second
+	
 	// Map
 	initializeMap();
 
@@ -104,6 +104,8 @@ function startSimulation() {
 	initializeBots();
 
 	// Initialize Screen
+	optionsMenu.className = 'hide';
+	gameScreen.className = "";
 	screen = new Screen(
 		canvas
 		,map.width * map.tileSize
@@ -111,9 +113,6 @@ function startSimulation() {
 	);
 
 	// Start Update Loop
-	optionsMenu.className = 'hide';
-	// canvas.className = "";
-	gameScreen.className = "";
 	gameLoop.start();
 };
 

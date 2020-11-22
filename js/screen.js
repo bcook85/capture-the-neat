@@ -7,6 +7,10 @@ class Screen {
 		this.canvas.height = height;
 		this.ctx = this.canvas.getContext("2d");
 		this.ctx.imageSmoothingEnabled = false;
+		// Automatically re-size game canvas
+		window.addEventListener("resize", () => { this.autoFullscreen(); }, false);
+		window.addEventListener("orientationchange", () => { this.autoFullscreen(); }, false);
+		this.autoFullscreen();
 	};
 	drawImage(
 			image
@@ -41,11 +45,19 @@ class Screen {
 		this.ctx.fillStyle = color;
 		this.ctx.fillRect(0, 0, this.width, this.height);
 	};
-	toggleFullscreen() {
-		if (!document.fullscreenElement) {
-			this.canvas.requestFullscreen();
-		} else if (document.exitFullscreen) {
-			document.exitFullscreen();
+	autoFullscreen() {
+		let newWidth = Math.floor(this.canvas.parentElement.clientWidth * 0.99);
+		let newHeight = Math.floor(window.innerHeight * 0.99);
+		let aspectRatio = this.canvas.width / this.canvas.height;
+		if (newWidth / newHeight > aspectRatio)	{//wide
+			newWidth = Math.floor(newHeight * aspectRatio);
+			this.canvas.style.height = newHeight + "px";
+			this.canvas.style.width = newWidth + "px";
+		}
+		else {//tall
+			newHeight = Math.floor(newWidth / aspectRatio);
+			this.canvas.style.width = newWidth + "px";
+			this.canvas.style.height = newHeight + "px";
 		}
 	};
 };

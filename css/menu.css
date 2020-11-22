@@ -37,6 +37,12 @@ Tabs Menu
 	color: black;
 }
 
+.tab p {
+	margin: auto;
+	max-width: 50vw;
+	font-size: 1.5em;
+}
+
 /******************************************************************************
 Sidebar
 ******************************************************************************/
@@ -80,7 +86,7 @@ Sidebar
 
 .gameContainer {
 	margin-left: 20em;
-	padding: 1em;
+	/*padding: 1em;*/
 	background-color: #222;
 	overflow: auto;
 }
