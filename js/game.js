@@ -41,6 +41,7 @@ let blueKillsDisplay = document.getElementById("BlueKillsDisplay");
 // Red Team UI
 let redBrainDimensionsInput =
 	document.getElementById("RedBrainDimensionsInput");
+let redStartScoreInput = document.getElementById("RedStartScoreInput");
 let redMutationRateInput = document.getElementById("RedMutationRateInput");
 let redMutationAmountInput = document.getElementById("RedMutationAmountInput");
 let redPickUpEnemyFlagInput =
@@ -52,6 +53,7 @@ let redHitAllyInput = document.getElementById("RedHitAllyInput");
 let redExploreInput = document.getElementById("RedExploreInput");
 function resetRedOptions() {
 	redBrainDimensionsInput.value = "12";
+	redStartScoreInput.value = "100";
 	redMutationRateInput.value = "0.005";
 	redMutationAmountInput.value = "0.001";
 	redPickUpEnemyFlagInput.value = "50";
@@ -64,6 +66,7 @@ function resetRedOptions() {
 // Blue Team UI
 let blueBrainDimensionsInput =
 	document.getElementById("BlueBrainDimensionsInput");
+let blueStartScoreInput = document.getElementById("BlueStartScoreInput");
 let blueMutationRateInput = document.getElementById("BlueMutationRateInput");
 let blueMutationAmountInput =
 	document.getElementById("BlueMutationAmountInput");
@@ -76,6 +79,7 @@ let blueHitAllyInput = document.getElementById("BlueHitAllyInput");
 let blueExploreInput = document.getElementById("BlueExploreInput");
 function resetBlueOptions() {
 	blueBrainDimensionsInput.value = "12";
+	blueStartScoreInput.value = "100";
 	blueMutationRateInput.value = "0.005";
 	blueMutationAmountInput.value = "0.001";
 	bluePickUpEnemyFlagInput.value = "50";
@@ -238,6 +242,7 @@ function initializeBots() {
 		redTeam.addBot(new Neat(
 			brainCount
 			,redDimensions
+			,parseInt(redStartScoreInput.value)
 			,parseFloat(redMutationRateInput.value)
 			,parseFloat(redMutationAmountInput.value)
 		));
@@ -245,6 +250,7 @@ function initializeBots() {
 		blueTeam.addBot(new Neat(
 			brainCount
 			,blueDimensions
+			,parseInt(blueStartScoreInput.value)
 			,parseFloat(blueMutationRateInput.value)
 			,parseFloat(blueMutationAmountInput.value)
 		));

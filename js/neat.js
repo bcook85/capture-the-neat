@@ -1,11 +1,11 @@
 class Neat {
-	constructor(populationCount, dimensions, mutationChance, mutationAmount) {
+	constructor(populationCount, dimensions, startScore, mutationChance, mutationAmount) {
 		this.popCap = populationCount;
 		this.dimensions = dimensions;
 		this.brains = [];
 
 		this.generation = 1;
-		this.startScore = 100;
+		this.startScore = startScore;
 		this.mutationChance = mutationChance;
 		this.mutationChanceCritical = this.mutationChance * 0.01;
 		this.mutationAmount = mutationAmount;
