@@ -1,0 +1,211 @@
+/******************************************************************************
+Tabs Menu
+******************************************************************************/
+
+.tabControl {
+	height: 80vh;
+	background-color: white;
+	overflow-y: auto;
+	z-index: 9999;
+}
+.tab {
+	margin: auto;
+	padding: 0.5em;
+}
+.tabBlock {
+	margin: auto;
+}
+.tabContainer {
+	margin: auto;
+	width: 100%;
+	overflow: hidden;
+	background-color: black;
+}
+.tabContainer button {
+	float: center;
+	margin: auto;
+	padding: 0.5em;
+	border: none;
+	background-color: black;
+	color: white;
+	font-weight: bold;
+	font-size: 2em;
+	cursor: pointer;
+}
+.tabContainer button:hover {
+	background-color: grey;
+	color: black;
+}
+
+/******************************************************************************
+Sidebar
+******************************************************************************/
+
+.sidebar {
+	height: 100%;
+	width: 20em;
+	position: fixed;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
+	background-color: black;
+	color: white;
+	z-index: 1;
+	text-align: left;
+}
+
+.sidebar span {
+	display: block;
+	width: 100%;
+	padding-left: 10px;
+	margin-top: 1em;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.sidebar table {
+	display: block;
+	font-size: 1em;
+	padding-left: 10px;
+	font-size: 1.5em;
+}
+
+.sidebar td {
+	width: 10em;
+}
+
+.sidebar td:nth-child(2) {
+	text-align: right;
+}
+
+.gameContainer {
+	margin-left: 20em;
+	padding: 1em;
+	background-color: #222;
+	overflow: auto;
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
+.blue {
+	color: blue;
+}
+
+/******************************************************************************
+Options Tables
+******************************************************************************/
+
+.optionsTable {
+	text-align: left;
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin: auto;
+}
+.optionsTable tr {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 5px;
+}
+.optionsTable td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 5px;
+}
+.optionsTable th {
+	border: 1px solid black;
+	border-collapse: collapse;
+	background-color: #999;
+	font-weight: bold;
+	padding: 5px;
+}
+.optionsTable button {
+	display: inline-block;
+	border: 1px solid black;
+	border-radius: 10px;
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	padding: 5px;
+	margin: 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.optionsTable button:hover {
+	border: 1px solid white;
+	border-radius: 10px;
+	background-color: black;
+	color: white;
+	font-weight: bold;
+	padding: 5px;
+	margin: 15px;
+	cursor: pointer;
+}
+.optionsTable input {
+	text-align: left;
+	border: 1px solid black;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 5em;
+}
+
+/******************************************************************************
+Misc.
+******************************************************************************/
+
+.hide {
+	display: none;
+}
+.startButton {
+	border: 1px solid white;
+	border-radius: 10px;
+	background-color: green;
+	color: white;
+	font-size: 2em;
+	font-weight: bold;
+	padding: 5px;
+	margin: 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.startButton:hover {
+	border: 1px solid green;
+	border-radius: 10px;
+	background-color: white;
+	color: green;
+	font-weight: bold;
+	padding: 5px;
+	margin: 15px;
+	cursor: pointer;
+}
+.resetButton {
+	border: 1px solid white;
+	border-radius: 10px;
+	background-color: red;
+	color: white;
+	font-size: 1em;
+	font-weight: bold;
+	padding: 5px;
+	margin: 15px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.resetButton:hover {
+	border: 1px solid red;
+	border-radius: 10px;
+	background-color: white;
+	color: red;
+	font-weight: bold;
+	padding: 5px;
+	margin: 15px;
+	cursor: pointer;
+}

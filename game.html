@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Capture The NEAT</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="Stylesheet" type="text/css" href="css/game.css">
+		<link rel="Stylesheet" type="text/css" href="css/menu.css">
+		<link rel="shortcut icon" type="image/png" href="images/red_flag.png"/>
+	</head>
+	<body>
+		<!-- Options UI -->
+		<div id="OptionsMenu">
+			<div class="tabControl">
+				<div class="tabContainer">
+					<button onclick="selectTab('GameSetup');" class="tabHeader">Game</button>
+					<button onclick="selectTab('RedSetup');" class="tabHeader">Red Team</button>
+					<button onclick="selectTab('BlueSetup');" class="tabHeader">Blue Team</button>
+					<button onclick="selectTab('MapSetup');" class="tabHeader">Map</button>
+				</div>
+				<div class="tab" id="GameSetup">
+					<h2>Game Options</h2>
+					<table id="RedTable" class="optionsTable">
+						<tr>
+							<th>Rounds Per Generation</th>
+							<td><input type="number" min="10" max="1000" id="RoundsPerGenerationInput" value="25" step="1"></td>
+						</tr>
+						<tr>
+							<th>Round Duration</th>
+							<td><input type="number" min="5" max="300" id="RoundTimeInput" value="30" step="5"></td>
+						</tr>
+						<tr>
+							<th>Bots Per Team</th>
+							<td><input type="number" min="1" max="100" id="BotsPerTeamInput" value="5" step="1"></td>
+						</tr>
+					</table>
+					<button class="resetButton" onclick="resetGameOptions();">Reset to Default</button>
+					<p>And here's where I'll give some information about this program. But for now, I'm too lazy.</p>
+				</div>
+				<div class="tab" id="RedSetup" style="display:none;">
+					<h2>Red Team Options</h2>
+					<table id="RedTable" class="optionsTable">
+						<tr>
+							<th>Hidden Layers</th>
+							<td><input type="text" id="RedBrainDimensionsInput" value="12"></td>
+						</tr>
+						<tr>
+							<th>Mutation Rate</th>
+							<td><input type="number" min="0" max="1" id="RedMutationRateInput" value="0.005" step="0.001"></td>
+						</tr>
+						<tr>
+							<th>Mutation Amount</th>
+							<td><input type="number" min="0" max="1" id="RedMutationAmountInput" value="0.001" step="0.001"></td>
+						</tr>
+						<tr>
+							<th>Pick Up Enemy Flag</th>
+							<td><input type="number" min="0" max="1000" id="RedPickUpEnemyFlagInput" value="50" step="1"></td>
+						</tr>
+						<tr>
+							<th>Capture Enemy Flag</th>
+							<td><input type="number" min="0" max="1000" id="RedCaptureEnemyFlagInput" value="150" step="1"></td>
+						</tr>
+						<tr>
+							<th>Hit Enemy</th>
+							<td><input type="number" min="0" max="1000" id="RedHitEnemyInput" value="15" step="1"></td>
+						</tr>
+						<tr>
+							<th>Hit Ally</th>
+							<td><input type="number" min="-1000" max="1000" id="RedHitAllyInput" value="-5" step="1"></td>
+						</tr>
+					</table>
+					<button class="resetButton" onclick="resetRedOptions();">Reset to Default</button>
+				</div>
+				<div class="tab" id="BlueSetup" style="display:none;">
+					<h2>Blue Team Options</h2>
+					<table id="BlueTable" class="optionsTable">
+						<tr>
+							<th>Hidden Layers</th>
+							<td><input type="text" id="BlueBrainDimensionsInput" value="12"></td>
+						</tr>
+						<tr>
+							<th>Mutation Rate</th>
+							<td><input type="number" min="0" max="1" id="BlueMutationRateInput" value="0.005" step="0.001"></td>
+						</tr>
+						<tr>
+							<th>Mutation Amount</th>
+							<td><input type="number" min="0" max="1" id="BlueMutationAmountInput" value="0.001" step="0.001"></td>
+						</tr>
+						<tr>
+							<th>Pick Up Enemy Flag</th>
+							<td><input type="number" min="0" max="1000" id="BluePickUpEnemyFlagInput" value="50" step="1"></td>
+						</tr>
+						<tr>
+							<th>Capture Enemy Flag</th>
+							<td><input type="number" min="0" max="1000" id="BlueCaptureEnemyFlagInput" value="150" step="1"></td>
+						</tr>
+						<tr>
+							<th>Hit Enemy</th>
+							<td><input type="number" min="0" max="1000" id="BlueHitEnemyInput" value="15" step="1"></td>
+						</tr>
+						<tr>
+							<th>Hit Ally</th>
+							<td><input type="number" min="-1000" max="1000" id="BlueHitAllyInput" value="-5" step="1"></td>
+						</tr>
+					</table>
+					<button class="resetButton" onclick="resetBlueOptions();">Reset to Default</button>
+				</div>
+				<div class="tab" id="MapSetup" style="display:none;">
+					<h2>Map Editor</h2>
+					<p>Coming soon...</p>
+					<button class="resetButton" onclick="resetMapOptions();">Reset to Default</button>
+				</div>
+			</div>
+			<button id="StartButton" class="hide" onclick="startSimulation();">Start Simulation</button>
+		</div>
+		<!-- Canvas -->
+		<div id="GameScreen" class="hide">
+			<div class="sidebar">
+				<span class="green">Simulation</span>
+				<table class="green">
+					<tr>
+						<td>Generation</td>
+						<td id="GenerationDisplay"></td>
+					</tr>
+					<tr>
+						<td>Group</td>
+						<td id="GroupDisplay"></td>
+					</tr>
+					<tr>
+						<td>Timer</td>
+						<td id="TimerDisplay"></td>
+					</tr>
+					<tr>
+						<td>Speed</td>
+						<td>
+							<select id="SpeedSelect">
+								<option value="1">1x</option>
+								<option value="5">5x</option>
+								<option value="10">10x</option>
+								<option value="20">20x</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				<span class="red">Red Team</span>
+				<table class="red">
+					<tr>
+						<td>Captures</td>
+						<td id="RedCapturesDisplay"></td>
+					</tr>
+					<tr>
+						<td>Kills</td>
+						<td id="RedKillsDisplay"></td>
+					</tr>
+				</table>
+				<span class="blue">Blue Team</span>
+				<table class="blue">
+					<tr>
+						<td>Captures</td>
+						<td id="BlueCapturesDisplay"></td>
+					</tr>
+					<tr>
+						<td>Kills</td>
+						<td id="BlueKillsDisplay"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="gameContainer">
+				<canvas id="screen"></canvas>
+			</div>
+		</div>
+		<!-- Game Code -->
+		<script type="text/javascript" src="js/nn.js"></script>
+		<script type="text/javascript" src="js/assets.js"></script>
+		<script type="text/javascript" src="js/loop.js"></script>
+		<script type="text/javascript" src="js/screen.js"></script>
+		<script type="text/javascript" src="js/team.js"></script>
+		<script type="text/javascript" src="js/map.js"></script>
+		<script type="text/javascript" src="js/game.js"></script>
+	</body>
+</html>
