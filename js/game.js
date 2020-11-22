@@ -285,7 +285,7 @@ function drawBots(team) {
 	for (let i = 0; i < team.bots.length; i++) {
 		if (team.bots[i].alive) {
 			// Shot
-			if (roundTime <= team.bots[i].lastAttack + 2) {//show for 2 frames
+			if (roundTime <= team.bots[i].lastAttack) {//show for 1 frame
 				screen.ctx.strokeStyle = "rgb(0,255,0)";
 				screen.ctx.lineWidth = 3;
 				let x = team.bots[i].x + (Math.cos(team.bots[i].dir) * team.bots[i].lastAttackDistance);
