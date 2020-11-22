@@ -321,6 +321,12 @@ function drawBots(team) {
 				,imageContainer.images[team.botImage].height
 			);
 			screen.ctx.restore();
+
+			// Bot ID
+			screen.ctx.font = "20px monospace";
+			screen.ctx.textAlign = "center";
+			screen.ctx.fillStyle = "white";
+			screen.ctx.fillText(team.bots[i].id + 1, Math.floor(team.bots[i].x * map.tileSize), Math.floor((team.bots[i].y * map.tileSize) + 6));
 		}
 	}
 }
