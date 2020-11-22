@@ -132,6 +132,20 @@ class Team {
 		}
 		// Interact with Flags
 		this.botFlagInteraction(bot, enemyTeam);
+		// Exploration
+		let gridX = Math.floor(bot.x);
+		let gridY = Math.floor(bot.y);
+		let found = false;
+		for (let i = 0; i < bot.visitedNodes.length; i++) {
+			if (bot.visitedNodes[i][0] == gridX && bot.visitedNodes[i][1] == gridY) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			bot.visitedNodes.push([gridX,gridY]);
+			bot.nn.brains[this.group].score += this.pointValues.explore;
+		}
 	};
 	botVision(bot, enemyTeam, map) {
 		let botInputs = [];
@@ -343,32 +357,3 @@ class Team {
 		}
 	};
 };
-
-
-			// if (this.hasFlag == 0 && enemyFlag.beingCarried == 0 && this.GetDist(enemyFlag.x, enemyFlag.y) <= this.size + enemyFlag.size) {
-			// 	enemyFlag.beingCarried = 1;
-			// 	enemyFlag.atHome = 0;
-			// 	this.hasFlag = 1;
-			// 	enemyFlag.carriedBy = this;
-			// 	points += FLAGTOUCHPOINTS;
-			// }
-			// //Capture Enemy Flag
-			// if (this.hasFlag == 1 && myFlag.atHome == 1 && this.GetDist(myFlag.x, myFlag.y) <= this.size + myFlag.size) {
-			// 	enemyFlag.atHome = 1;
-			// 	this.hasFlag = 0;
-			// 	enemyFlag.beingCarried = 0;
-			// 	enemyFlag.carriedBy = null;
-			// 	enemyFlag.x = enemyFlag.homeX;
-			// 	enemyFlag.y = enemyFlag.homeY;
-			// 	points += FLAGCAPTUREPOINTS;
-			// 	myFlag.teamScore += 1;
-			// }
-			// //Return My Flag
-			// if (myFlag.atHome == 0 && myFlag.beingCarried == 0 && this.GetDist(myFlag.x, myFlag.y) <= this.size + myFlag.size) {
-			// 	myFlag.atHome = 1;
-			// 	myFlag.beingCarried = 0;
-			// 	myFlag.carriedBy = null;
-			// 	points += FLAGTOUCHPOINTS;
-			// 	myFlag.x = myFlag.homeX;
-			// 	myFlag.y = myFlag.homeY;
-			// }

@@ -49,6 +49,7 @@ let redCaptureEnemyFlagInput =
 	document.getElementById("RedCaptureEnemyFlagInput");
 let redHitEnemyInput = document.getElementById("RedHitEnemyInput");
 let redHitAllyInput = document.getElementById("RedHitAllyInput");
+let redExploreInput = document.getElementById("RedExploreInput");
 function resetRedOptions() {
 	redBrainDimensionsInput.value = "12";
 	redMutationRateInput.value = "0.005";
@@ -57,6 +58,7 @@ function resetRedOptions() {
 	redCaptureEnemyFlagInput.value = "150";
 	redHitEnemyInput.value = "15";
 	redHitAllyInput.value = "-5";
+	redExploreInput.value = "0.25";
 }
 
 // Blue Team UI
@@ -71,6 +73,7 @@ let blueCaptureEnemyFlagInput =
 	document.getElementById("BlueCaptureEnemyFlagInput");
 let blueHitEnemyInput = document.getElementById("BlueHitEnemyInput");
 let blueHitAllyInput = document.getElementById("BlueHitAllyInput");
+let blueExploreInput = document.getElementById("BlueExploreInput");
 function resetBlueOptions() {
 	blueBrainDimensionsInput.value = "12";
 	blueMutationRateInput.value = "0.005";
@@ -79,6 +82,7 @@ function resetBlueOptions() {
 	blueCaptureEnemyFlagInput.value = "150";
 	blueHitEnemyInput.value = "15";
 	blueHitAllyInput.value = "-5";
+	blueExploreInput.value = "0.25";
 }
 
 // Map UI
@@ -184,6 +188,7 @@ function initializeBots() {
 		,"captureEnemyFlag": parseInt(redCaptureEnemyFlagInput.value)
 		,"hitEnemy": parseInt(redHitEnemyInput.value)
 		,"hitAlly": parseInt(redHitAllyInput.value)
+		,"explore": parseFloat(redExploreInput.value)
 	};
 	// Blue Points
 	let bluePoints = {
@@ -191,6 +196,7 @@ function initializeBots() {
 		,"captureEnemyFlag": parseInt(blueCaptureEnemyFlagInput.value)
 		,"hitEnemy": parseInt(blueHitEnemyInput.value)
 		,"hitAlly": parseInt(blueHitAllyInput.value)
+		,"explore": parseFloat(blueExploreInput.value)
 	};
 
 	redTeam = new Team(
