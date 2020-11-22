@@ -111,7 +111,7 @@ class Team {
 		}
 		return false;
 	};
-	updateBot(bot, enemyTeam, map, roundTime) {
+	updateBot(bot, enemyTeam, map, gameTime) {
 		// Gather NN inputs
 		let inputs = this.botVision(bot, enemyTeam, map);
 		inputs.push(this.flag.atHome);
@@ -128,7 +128,7 @@ class Team {
 		);
 		// Bot attack
 		if (outputs[3] > 0.5) {
-			this.botAttack(bot, map, enemyTeam, roundTime);
+			this.botAttack(bot, map, enemyTeam, gameTime);
 		}
 		// Interact with Flags
 		this.botFlagInteraction(bot, enemyTeam);
@@ -271,9 +271,9 @@ class Team {
 			bot.y -= Math.sin(bot.dir + (Math.PI * 0.5)) * bot.strafeSpeed * strafe;
 		}
 	};
-	botAttack(bot, map, enemyTeam, roundTime) {
-		if (roundTime >= bot.lastAttack + 1000) {
-			bot.lastAttack = roundTime;
+	botAttack(bot, map, enemyTeam, gameTime) {
+		if (gameTime >= bot.lastAttack + 60) {
+			bot.lastAttack = gameTime;
 			bot.lastAttackDistance = this.maxViewDistance;
 			let sx = bot.x;
 			let sy = bot.y;

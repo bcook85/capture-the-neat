@@ -96,7 +96,7 @@ canvas.onclick = function() {screen.toggleFullscreen();}
 
 function startSimulation() {
 	// Game
-	maxRoundTime = parseInt(roundTimeInput.value) * 1000;
+	maxRoundTime = parseInt(roundTimeInput.value) * 60;//60 frames per second
 	// Map
 	initializeMap();
 
@@ -126,7 +126,6 @@ let screen = 0;
 let imageContainer = new ImageContainer();
 let loadLoop = new Loop(loadUpate);
 let gameLoop = new Loop(gameUpdate);
-let gameTime = 0;
 let roundTime = 0;
 let maxRoundTime = 0;
 let gameSpeed = 1;
@@ -287,7 +286,7 @@ function drawBots(team) {
 	for (let i = 0; i < team.bots.length; i++) {
 		if (team.bots[i].alive) {
 			// Shot
-			if (roundTime <= team.bots[i].lastAttack + 33 && roundTime >= 33) {
+			if (roundTime <= team.bots[i].lastAttack + 2) {//show for 2 frames
 				screen.ctx.strokeStyle = "green";
 				screen.ctx.lineWidth = 5;
 				let x = team.bots[i].x + (Math.cos(team.bots[i].dir) * team.bots[i].lastAttackDistance);
@@ -371,7 +370,7 @@ function drawUI() {
 	);
 	generationDisplay.innerHTML = currentGeneration;
 	groupDisplay.innerHTML = `${currentGroup + 1}/${brainCount}`;
-	timerDisplay.innerHTML = `${Math.floor(roundTime * 0.001)}/${Math.floor(maxRoundTime * 0.001)}`;
+	timerDisplay.innerHTML = `${Math.floor(roundTime / 60)}/${Math.floor(maxRoundTime / 60)}`;
 	redCapturesDisplay.innerHTML = redTeam.captures;
 	redKillsDisplay.innerHTML = redTeam.kills;
 	blueCapturesDisplay.innerHTML = blueTeam.captures;
@@ -413,8 +412,7 @@ function nextWave() {
 
 function gameUpdate() {
 	for (let i = 0; i < gameSpeed; i++) {
-		gameTime += gameLoop.elapsed;
-		roundTime += gameLoop.elapsed;
+		roundTime += 1;
 		//Update
 		updateTeam(redTeam, blueTeam);
 		updateTeam(blueTeam, redTeam);
